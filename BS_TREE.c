@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+//Program for Binary Search Tree
 //structure
 typedef struct tree
 {
     struct Node *root;
-
 } tree;
 
 typedef struct Node
