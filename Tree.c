@@ -1,46 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct tree
-{
-    struct Node *root;
-} tree;
-
-typedef struct Node
-{
-    struct Node *left, *right;
+typedef struct Tree{
+    struct Tree *left, *right;
     int data;
 } Node;
 
-Node *getNode(int data)
-{
+Node *getNode(int data){
     Node *newNode = (Node *)malloc(sizeof(Node));
     newNode->data = data;
     newNode->left = newNode->right = NULL;
     return newNode;
 }
 
-Node *buildBST(Node *root, int val)
-{
-    if (root == NULL)
-    {
+Node *buildBST(Node *root, int val){
+    if (root == NULL){
         root = getNode(val);
         return root;
     }
-    if (root->data > val)
-    {
+    if (root->data > val){
         root->left = buildBST(root->left, val);
-    }
-    else
-    {
+    }else{
         root->right = buildBST(root->right, val);
     }
-
     return root;
 }
 
-void inOrder(Node *root)
-{
+void inOrder(Node *root){
     if (root == NULL)
         return;
     inOrder(root->left);
@@ -48,8 +33,7 @@ void inOrder(Node *root)
     inOrder(root->right);
 }
 
-void preOrder(Node *root)
-{
+void preOrder(Node *root){
     if (root == NULL)
         return;
     printf("%d ", root->data);
@@ -57,8 +41,7 @@ void preOrder(Node *root)
     preOrder(root->right);
 }
 
-void postOrder(Node *root)
-{
+void postOrder(Node *root){
     if (root == NULL)
         return;
     postOrder(root->left);
@@ -66,24 +49,21 @@ void postOrder(Node *root)
     printf("%d ", root->data);
 }
 
-int main()
-{
-    tree tree;
+int main(){
+    Node * root = NULL;
     int arr[] = {40, 23, 4, 7, 23, 12, 5, 1, 354, 45, 100, 389};
     int length = sizeof(arr) / sizeof(arr[0]);
-    tree.root = NULL;
-
     for (int i = 0; i < length; i++)
     {
-        tree.root = buildBST(tree.root, arr[i]);
+        root = buildBST(root, arr[i]);
     }
 
-    printf("\n in-Order =     :");
-    inOrder(tree.root);
-    printf("\n pre-Order =    :");
-    preOrder(tree.root);
-    printf("\n post-Order =   :");
-    postOrder(tree.root);
+    printf("\nIn-Order Traversal -> ");
+    inOrder(root);
+    printf("\nPre-Order Traversal -> ");
+    preOrder(root);
+    printf("\nPost-Order Traversal -> ");
+    postOrder(root);
     printf("\n");
     return 0;
 }
