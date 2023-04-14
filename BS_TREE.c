@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//structure
 typedef struct tree
 {
     struct Node *root;
