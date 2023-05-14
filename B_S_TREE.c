@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-
+#include<stdbool.h>
 typedef struct Node
 {
     struct Node *left, *right;
@@ -34,18 +34,15 @@ Node *insert(Node *root, int val)
     return root;
 }
 
-Node *search(Node *root, int val)
+bool search(Node *root, int val)
 {
-    if (root == NULL || root->data == val)
-    {
-        return root;
-    }
-    if (root->data > val)
-    {
+    if (root == NULL || root->data == val){
+        if(root==NULL)
+            return false;
+        return true;
+    }else if(root->data > val){
         return search(root->left, val);
-    }
-    else
-    {
+    }else{
         return search(root->right, val);
     }
 }
@@ -108,7 +105,7 @@ void inOrder(Node *root)
 int main()
 {
     Node *root = NULL;
-    int choice, value;
+    int choice=1, value;
 
     do
     {
@@ -128,14 +125,7 @@ int main()
         case 2:
             printf("Enter the value to search: ");
             scanf("%d", &value);
-            if (search(root, value) != NULL)
-            {
-                printf("Value found in the tree!\n");
-            }
-            else
-            {
-                printf("Value not found in the tree!\n");
-            }
+            printf("%s", search(root,value) ? "Value Found" : "Value not found");
             break;
 
         case 3:
@@ -150,4 +140,12 @@ int main()
             inOrder(root);
             printf("\n");
             break;
+
+        default:
+            printf("\nInvalid choice!!");
+            break;
+        }
+    }while(choice!=0);
+    return 0;
+}
 
